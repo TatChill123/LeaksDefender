@@ -31,7 +31,8 @@ This module will help you prevent them!
 
     leakModule:DisconnectAll()
 
-[NOTES]: This module is new, except not-existing methods that are needed
+[NOTES]: This module is new, except non-existing methods
+
 [CONTRIBUTE]: All contributions are all appreciated to improve this module
 
 [LICENSE]: Under MIT license
