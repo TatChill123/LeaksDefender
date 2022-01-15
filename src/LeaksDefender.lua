@@ -1,10 +1,8 @@
 local leak = {}
 leak.__index = leak
 
-function leak.new(plrName: string, humanoid: Humanoid, event: RBXScriptSignal)
+function leak.new(event: RBXScriptSignal)
     local self = setmetatable({
-        Name = plrName;
-        Humanoid = humanoid;
         DefaultEvent = event;
         Events = {}
     }, leak)
