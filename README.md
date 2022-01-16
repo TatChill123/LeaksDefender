@@ -11,23 +11,43 @@ This module will help you prevent them!
     LeaksDefender can be used on tools, instances, functions, and even classes!
 
 [INSTRUCTION_API]:
-    This module works the exact same way as Janitor, Maid or any other helper modules. We start off by creating a [LeaksDefender] object:
+    - This module works the exact same way as other libraries. We start off by creating a [LeaksDefender] object:
 
     local leakModule = require(pathname.LeaksDefender).new(event: RBXScriptSignal)
+
 
     - event (optional): This will be the default event for the object, if the event fires, it will trigger the DisconnectAll() method to clear all events
     Now we would like to add some events for it:
 
+
     leakModule:Add({
-        Instance.new("Part", workspace).Touched:Connect(function()
+        obbyTouch = Instance.new("Part", workspace).Touched:Connect(function()
             print("touched")
         end),
-        humanoid.Running:Connect(someCallback)
+        playerDeath = humanoid.Running:Connect(someCallback)
     })
 
-    The method takes 1 parameter is the table contains all events you would like to add (this can also be your workspace to work with events too!)
 
-    To remove all the connections simply call the method DisconnectAll():
+    - The method takes 1 parameter is the table contains all events you would like to add (this can also be your workspace to work with events too!)
+    - You need to remove an event? Let's use the Disconnect() method:
+
+
+    leakModule:Disconnect(name: string, removal: number)
+
+
+    - name: Use to search inside the list to find the specific event, return nil if not exists
+    - removal (optional): Use to remove the event entirely from the list (leave empty if you don't want to)
+
+    Wait, that's my mistake! I want to reconnect it! Don't worry, you can use Reconnect() method:
+
+
+    leakModule:Reconnect(name: string, callback: function)
+
+
+    - name: The event's name
+    - callback (require): The function you want it to connect to (missing this will cause an error)
+
+    - To remove all the connections simply call the method DisconnectAll():
 
     leakModule:DisconnectAll()
 

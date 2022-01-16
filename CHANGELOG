@@ -1,0 +1,6 @@
+# Sun 16/1/2022 - 8:00AM
+@TatChill123
+
++ Added Disconnect() and Reconnect() method
++ Events now use have their own key
++ Type-scripting

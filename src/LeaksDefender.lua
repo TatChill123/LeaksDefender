@@ -1,13 +1,15 @@
 local leak = {}
 leak.__index = leak
 
+type Function = {callback: Function}
+
 function leak.new(event: RBXScriptSignal)
     local self = setmetatable({
         DefaultEvent = event;
         Events = {}
     }, leak)
     self:Add({
-        self.DefaultEvent and self.DefaultEvent:Connect(function()
+        dfe = self.DefaultEvent and self.DefaultEvent:Connect(function()
             return self:DisconnectAll()
         end) or nil
     })
@@ -15,15 +17,31 @@ function leak.new(event: RBXScriptSignal)
 end
 
 function leak:Add(t: {RBXScriptConnection})
-    for _, events: RBXScriptConnection in pairs(t) do
-        table.insert(self.Events, events)
+    for key: string, events: RBXScriptConnection in pairs(t) do
+        self.Events[key] = events
     end
 end
 
+function leak:Disconnect(name: string, removal: any?)
+    local event: RBXScriptConnection = self.Events[name]
+    if not event then
+        return warn(string.format("Event \"%s\" is not exists!", name))
+    end
+    event:Disconnect()
+    if removal then
+        self.Events[name] = nil
+    end
+end
+
+function leak:Reconnect(name: string, callback: Function)
+    assert(type(callback) == "function", "Missing callback function or not a valid function!")
+    return self.Events[name] and self.Events[name]:Connect(callback) or warn(string.format("Event \"%s\" is not found!", name))
+end
+
 function leak:DisconnectAll()
-    for _, events: RBXScriptConnection in pairs(self.Events) do
+    for key: string, events: RBXScriptConnection in pairs(self.Events) do
         events:Disconnect()
-        events = nil
+        self.Events[key] = nil
     end
     return table.clear(self.Events)
 end
