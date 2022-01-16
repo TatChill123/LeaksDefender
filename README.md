@@ -21,14 +21,14 @@ This module will help you prevent them!
 
 
     leakModule:Add({
-        obbyTouch = Instance.new("Part", workspace).Touched:Connect(function()
-            print("touched")
+        obbyTouch = {Instance.new("Part", workspace).Touched, (function()
+            print("touched")},
         end),
-        playerDeath = humanoid.Running:Connect(someCallback)
+        playerDeath = {humanoid.Running, someCallback}
     })
 
 
-    - The method takes 1 parameter is the table contains all events you would like to add (this can also be your workspace to work with events too!)
+    - The method takes 1 parameter is the table contains all events you would like to add, each event will contain another table to store the event itself, and a function use to be its callback (this can also be your workspace to work with events too!)
     - You need to remove an event? Let's use the Disconnect() method:
 
 
@@ -46,6 +46,10 @@ This module will help you prevent them!
 
     - name: The event's name
     - callback (require): The function you want it to connect to (missing this will cause an error)
+
+    - To see all available events, use the GetAvailableEvents() method:
+    
+    leakModule:GetAvailableEvents()
 
     - To remove all the connections simply call the method DisconnectAll():
 
