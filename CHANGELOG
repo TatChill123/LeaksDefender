@@ -1,3 +1,10 @@
+# Sun 10/2/2022 - 10:54AM
+@TatChill123
+
++ Fixed and modified conditions checking
++ GetAvailableEvents() method now return the events table
+
+-------------------------------------------------------
 # Sun 16/1/2022 - 9:00AM
 @TatChill123
 
