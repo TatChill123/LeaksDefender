@@ -16,8 +16,7 @@ This module will help you prevent them!
     local leakModule = require(pathname.LeaksDefender).new(event: RBXScriptSignal)
 
 
-- event (optional): This will be the default event for the object, if the event fires, it will trigger the DisconnectAll() method to clear all events
-Now we would like to add some events for it:
+   - event (optional): This will be the default event for the object, if the event fires, it will trigger the DisconnectAll() method to clear all events. Now we would like to add some events for it:
 
 
     leakModule:Add({
@@ -28,30 +27,30 @@ Now we would like to add some events for it:
     })
 
 
-- The method takes 1 parameter is the table contains all events you would like to add, each event will contain another table to store the event itself, and a function use to be its callback (this can also be your workspace to work with events too!)
-- You need to remove an event? Let's use the Disconnect() method:
+   - The method takes 1 parameter is the table contains all events you would like to add, each event will contain another table to store the event itself, and a function use to be its callback (this can also be your workspace to work with events too!)
+   - You need to remove an event? Let's use the Disconnect() method:
 
 
     leakModule:Disconnect(name: string, removal: number)
 
 
-- name: Use to search inside the list to find the specific event, return nil if not exists
-- removal (optional): Use to remove the event entirely from the list (leave empty if you don't want to)
+   - name: Use to search inside the list to find the specific event, return nil if not exists
+   - removal (optional): Use to remove the event entirely from the list (leave empty if you don't want to)
 
-    Wait, that's my mistake! I want to reconnect it! Don't worry, you can use Reconnect() method:
+   Wait, that's my mistake! I want to reconnect it! Don't worry, you can use Reconnect() method:
 
 
     leakModule:Reconnect(name: string, callback: function)
 
 
-- name: The event's name
-- callback (require): The function you want it to connect to (missing this will cause an error)
+   - name: The event's name
+   - callback (require): The function you want it to connect to (missing this will cause an error)
 
-- To see all available events, use the GetAvailableEvents() method:
+   - To see all available events, use the GetAvailableEvents() method:
     
     leakModule:GetAvailableEvents()
 
-    - To remove all the connections simply call the method DisconnectAll():
+   - To remove all the connections simply call the method DisconnectAll():
 
     leakModule:DisconnectAll()
 
