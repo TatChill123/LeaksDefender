@@ -1,3 +1,7 @@
+-- LeaksDefender (made by TatChill)
+-- All rights reserved
+-- GitHub repo: https://github.com/TatChill123/LeaksDefender
+
 type Function = {callback: Function}
 
 local EVENT_NOT_FOUND: string = "Event \"%s\" is not found!"
